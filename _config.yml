@@ -1,0 +1,41 @@
+# Jekyll Configuration for GitHub Pages
+title: Stevenson Research Group
+description: Quantum sensing and nanoscale physics research at Northeastern University
+url: "https://yourusername.github.io" # Replace with your GitHub Pages URL
+baseurl: "" # Leave empty if repo is named username.github.io, otherwise use "/repository-name"
+
+# Build settings
+markdown: kramdown
+theme: minima # You can change or remove this if using custom styling
+
+# Exclude files from build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - LICENSE
+
+# Collections (optional - for organizing research papers, team members, etc.)
+collections:
+  publications:
+    output: true
+  people:
+    output: true
+
+# Default values
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# Plugins (GitHub Pages supported plugins)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Contact information
+email: contact@stevensonresearch.com
+twitter_username: stevenson_lab
+github_username: stevenson-research

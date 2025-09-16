@@ -15,7 +15,7 @@ baseurl: "" # Leave empty if repo is named username.github.io, otherwise use "/r
 #   "ocean"             (Natural science - cyan gradient)
 #   "slate-orange"      (Modern tech - gray with orange accents)
 #   "plum-rose"         (Innovative & warm)
-color_theme: "ocean"  # Change this to switch color schemes!
+color_theme: "purple-teal"  # Change this to switch color schemes!
 
 # Build settings
 markdown: kramdown

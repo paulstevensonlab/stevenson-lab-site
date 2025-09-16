@@ -1,0 +1,324 @@
+---
+layout: default
+title: Stevenson Research Group - Northeastern University
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+        }
+        
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(30, 60, 114, 0.7), rgba(42, 82, 152, 0.7)), 
+                        url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="1920" height="600" fill="url(%23grid)"/></svg>') center/cover;
+            color: white;
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero .subtitle {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+        
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        
+        .intro-section {
+            background: white;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+        
+        .intro-section h2 {
+            color: #1e3c72;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+        
+        .intro-section p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        
+        /* Research Areas Grid */
+        .research-areas {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .research-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .research-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        
+        .research-card h3 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        .research-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Quick Links */
+        .quick-links {
+            background: #f8f9fa;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        
+        .quick-links-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+        
+        .quick-links h2 {
+            color: #1e3c72;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .link-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #2a5298;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+            font-weight: 500;
+        }
+        
+        .link-button:hover {
+            background: #1e3c72;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .footer-links {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <a href="{{ site.baseurl }}/" class="site-title">Stevenson Research Group</a>
+            <nav>
+                <ul>
+                    <li><a href="{{ site.baseurl }}/">Home</a></li>
+                    <li><a href="{{ site.baseurl }}/research">Research</a></li>
+                    <li><a href="{{ site.baseurl }}/publications">Publications</a></li>
+                    <li><a href="{{ site.baseurl }}/people">People</a></li>
+                    <li><a href="{{ site.baseurl }}/news">News</a></li>
+                    <li><a href="{{ site.baseurl }}/contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Shining Light on Single Spins</h1>
+            <p class="subtitle">Advancing quantum sensing at the nanoscale to unlock new frontiers in science and technology</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <section class="intro-section">
+            <h2>Welcome to the Stevenson Group</h2>
+            <p>Welcome to the website of the Stevenson group at Northeastern University! We are a highly interdisciplinary lab using spin-based quantum sensors to address important scientific questions spanning chemistry, physics, biology and materials science.</p>
+            <p>Our research focuses on developing and applying cutting-edge quantum sensing techniques to study fundamental processes at the single-molecule and nanoscale level. By harnessing the unique properties of quantum systems, we push the boundaries of measurement precision and explore phenomena that were previously inaccessible.</p>
+        </section>
+
+        <section>
+            <h2 style="text-align: center; color: #1e3c72; margin-bottom: 2rem;">Research Areas</h2>
+            <div class="research-areas">
+                <div class="research-card">
+                    <h3>Quantum Sensing</h3>
+                    <p>Developing novel quantum sensors based on single spins for unprecedented measurement sensitivity and spatial resolution.</p>
+                </div>
+                <div class="research-card">
+                    <h3>Materials Science</h3>
+                    <p>Investigating quantum materials and their properties using advanced spectroscopic techniques and spin-based probes.</p>
+                </div>
+                <div class="research-card">
+                    <h3>Biophysics</h3>
+                    <p>Applying quantum sensing to study biological systems at the molecular level, revealing new insights into life processes.</p>
+                </div>
+                <div class="research-card">
+                    <h3>Nanoscale Physics</h3>
+                    <p>Exploring quantum phenomena at the nanoscale and developing tools for single-molecule detection and manipulation.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <section class="quick-links">
+        <div class="quick-links-content">
+            <h2>Quick Links</h2>
+            <div class="links-grid">
+                <a href="{{ site.baseurl }}/publications" class="link-button">Recent Publications</a>
+                <a href="{{ site.baseurl }}/join" class="link-button">Join Our Lab</a>
+                <a href="{{ site.baseurl }}/facilities" class="link-button">Facilities</a>
+                <a href="{{ site.baseurl }}/collaborations" class="link-button">Collaborations</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="https://www.northeastern.edu">Northeastern University</a>
+                <a href="{{ site.baseurl }}/contact">Contact Us</a>
+                <a href="{{ site.baseurl }}/privacy">Privacy Policy</a>
+            </div>
+            <p>&copy; {{ site.time | date: '%Y' }} Stevenson Research Group. All rights reserved.</p>
+            <p>Department of Physics, Northeastern University, Boston, MA 02115</p>
+        </div>
+    </footer>
+</body>
+</html>

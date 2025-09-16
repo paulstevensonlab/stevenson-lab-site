@@ -10,6 +10,120 @@ title: Stevenson Research Group - Northeastern University
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title }}</title>
     <style>
+        /* Color Theme Definitions */
+        :root {
+            /* Default: Original Blue Theme */
+            --primary-gradient-start: #1e3c72;
+            --primary-gradient-end: #2a5298;
+            --primary-color: #1e3c72;
+            --primary-dark: #152a54;
+            --accent-color: #2a5298;
+            --heading-color: #1e3c72;
+            --text-color: #333;
+            --text-light: #666;
+            --bg-light: #f8f9fa;
+            --white: #ffffff;
+            --shadow: rgba(0,0,0,0.1);
+            --shadow-hover: rgba(0,0,0,0.15);
+        }
+        
+        /* Theme: Deep Purple & Teal */
+        {% if site.color_theme == "purple-teal" %}
+        :root {
+            --primary-gradient-start: #5e35b1;
+            --primary-gradient-end: #00acc1;
+            --primary-color: #5e35b1;
+            --primary-dark: #4527a0;
+            --accent-color: #00acc1;
+            --heading-color: #4527a0;
+        }
+        {% endif %}
+        
+        /* Theme: Forest Green & Gold */
+        {% if site.color_theme == "forest-gold" %}
+        :root {
+            --primary-gradient-start: #1b5e20;
+            --primary-gradient-end: #2e7d32;
+            --primary-color: #1b5e20;
+            --primary-dark: #0d4a0f;
+            --accent-color: #f9a825;
+            --heading-color: #1b5e20;
+        }
+        {% endif %}
+        
+        /* Theme: Charcoal & Crimson */
+        {% if site.color_theme == "charcoal-crimson" %}
+        :root {
+            --primary-gradient-start: #37474f;
+            --primary-gradient-end: #c62828;
+            --primary-color: #37474f;
+            --primary-dark: #263238;
+            --accent-color: #c62828;
+            --heading-color: #263238;
+        }
+        {% endif %}
+        
+        /* Theme: Navy & Coral */
+        {% if site.color_theme == "navy-coral" %}
+        :root {
+            --primary-gradient-start: #1a237e;
+            --primary-gradient-end: #283593;
+            --primary-color: #1a237e;
+            --primary-dark: #0d47a1;
+            --accent-color: #ff6b6b;
+            --heading-color: #0d47a1;
+        }
+        {% endif %}
+        
+        /* Theme: Burgundy & Gray */
+        {% if site.color_theme == "burgundy-gray" %}
+        :root {
+            --primary-gradient-start: #6d1f2c;
+            --primary-gradient-end: #8e2c3e;
+            --primary-color: #6d1f2c;
+            --primary-dark: #4a0e17;
+            --accent-color: #607d8b;
+            --heading-color: #4a0e17;
+        }
+        {% endif %}
+        
+        /* Theme: Ocean Gradient */
+        {% if site.color_theme == "ocean" %}
+        :root {
+            --primary-gradient-start: #006064;
+            --primary-gradient-end: #00838f;
+            --primary-color: #006064;
+            --primary-dark: #004d40;
+            --accent-color: #26c6da;
+            --heading-color: #004d40;
+        }
+        {% endif %}
+        
+        /* Theme: Slate & Orange */
+        {% if site.color_theme == "slate-orange" %}
+        :root {
+            --primary-gradient-start: #455a64;
+            --primary-gradient-end: #546e7a;
+            --primary-color: #455a64;
+            --primary-dark: #37474f;
+            --accent-color: #ff6d00;
+            --heading-color: #37474f;
+        }
+        {% endif %}
+        
+        /* Theme: Plum & Rose Gold */
+        {% if site.color_theme == "plum-rose" %}
+        :root {
+            --primary-gradient-start: #6b46c1;
+            --primary-gradient-end: #9c27b0;
+            --primary-color: #6b46c1;
+            --primary-dark: #4a148c;
+            --accent-color: #e91e63;
+            --heading-color: #4a148c;
+        }
+        {% endif %}
+        
+        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -19,15 +133,15 @@ title: Stevenson Research Group - Northeastern University
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-color);
         }
         
         /* Header */
         header {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--primary-gradient-start) 0%, var(--primary-gradient-end) 100%);
+            color: var(--white);
             padding: 1rem 0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px var(--shadow);
         }
         
         .header-content {
@@ -43,7 +157,7 @@ title: Stevenson Research Group - Northeastern University
             font-size: 1.5rem;
             font-weight: 600;
             text-decoration: none;
-            color: white;
+            color: var(--white);
         }
         
         nav ul {
@@ -53,7 +167,7 @@ title: Stevenson Research Group - Northeastern University
         }
         
         nav a {
-            color: white;
+            color: var(--white);
             text-decoration: none;
             transition: opacity 0.3s;
             font-weight: 500;
@@ -65,9 +179,10 @@ title: Stevenson Research Group - Northeastern University
         
         /* Hero Section */
         .hero {
-            background: linear-gradient(rgba(30, 60, 114, 0.7), rgba(42, 82, 152, 0.7)), 
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)),
+                        linear-gradient(135deg, var(--primary-gradient-start), var(--primary-gradient-end)),
                         url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="1920" height="600" fill="url(%23grid)"/></svg>') center/cover;
-            color: white;
+            color: var(--white);
             padding: 6rem 2rem;
             text-align: center;
         }
@@ -98,15 +213,15 @@ title: Stevenson Research Group - Northeastern University
         }
         
         .intro-section {
-            background: white;
+            background: var(--white);
             padding: 3rem;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px var(--shadow);
             margin-bottom: 3rem;
         }
         
         .intro-section h2 {
-            color: #1e3c72;
+            color: var(--heading-color);
             margin-bottom: 1.5rem;
             font-size: 2rem;
         }
@@ -118,6 +233,13 @@ title: Stevenson Research Group - Northeastern University
         }
         
         /* Research Areas Grid */
+        .section-title {
+            text-align: center;
+            color: var(--heading-color);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+        
         .research-areas {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -126,32 +248,33 @@ title: Stevenson Research Group - Northeastern University
         }
         
         .research-card {
-            background: white;
+            background: var(--white);
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px var(--shadow);
             transition: transform 0.3s, box-shadow 0.3s;
+            border-top: 3px solid var(--accent-color);
         }
         
         .research-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 20px var(--shadow-hover);
         }
         
         .research-card h3 {
-            color: #1e3c72;
+            color: var(--heading-color);
             margin-bottom: 1rem;
             font-size: 1.3rem;
         }
         
         .research-card p {
-            color: #666;
+            color: var(--text-light);
             line-height: 1.6;
         }
         
         /* Quick Links */
         .quick-links {
-            background: #f8f9fa;
+            background: var(--bg-light);
             padding: 3rem 0;
             margin-top: 4rem;
         }
@@ -164,7 +287,7 @@ title: Stevenson Research Group - Northeastern University
         }
         
         .quick-links h2 {
-            color: #1e3c72;
+            color: var(--heading-color);
             margin-bottom: 2rem;
             font-size: 2rem;
         }
@@ -179,22 +302,34 @@ title: Stevenson Research Group - Northeastern University
         .link-button {
             display: inline-block;
             padding: 1rem 2rem;
-            background: #2a5298;
-            color: white;
+            background: var(--primary-color);
+            color: var(--white);
             text-decoration: none;
             border-radius: 5px;
-            transition: background 0.3s;
+            transition: all 0.3s;
             font-weight: 500;
         }
         
         .link-button:hover {
-            background: #1e3c72;
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        
+        /* Special styling for accent buttons */
+        .link-button.accent {
+            background: var(--accent-color);
+        }
+        
+        .link-button.accent:hover {
+            filter: brightness(0.9);
+            background: var(--accent-color);
         }
         
         /* Footer */
         footer {
             background: #2c3e50;
-            color: white;
+            color: var(--white);
             padding: 2rem 0;
             text-align: center;
         }
@@ -210,7 +345,7 @@ title: Stevenson Research Group - Northeastern University
         }
         
         .footer-links a {
-            color: white;
+            color: var(--white);
             text-decoration: none;
             margin: 0 1rem;
             transition: opacity 0.3s;
@@ -239,6 +374,10 @@ title: Stevenson Research Group - Northeastern University
             
             .hero .subtitle {
                 font-size: 1.1rem;
+            }
+            
+            .research-card {
+                padding: 1.5rem;
             }
         }
     </style>
@@ -275,7 +414,7 @@ title: Stevenson Research Group - Northeastern University
         </section>
 
         <section>
-            <h2 style="text-align: center; color: #1e3c72; margin-bottom: 2rem;">Research Areas</h2>
+            <h2 class="section-title">Research Areas</h2>
             <div class="research-areas">
                 <div class="research-card">
                     <h3>Quantum Sensing</h3>
@@ -302,7 +441,7 @@ title: Stevenson Research Group - Northeastern University
             <h2>Quick Links</h2>
             <div class="links-grid">
                 <a href="{{ site.baseurl }}/publications" class="link-button">Recent Publications</a>
-                <a href="{{ site.baseurl }}/join" class="link-button">Join Our Lab</a>
+                <a href="{{ site.baseurl }}/join" class="link-button accent">Join Our Lab</a>
                 <a href="{{ site.baseurl }}/facilities" class="link-button">Facilities</a>
                 <a href="{{ site.baseurl }}/collaborations" class="link-button">Collaborations</a>
             </div>

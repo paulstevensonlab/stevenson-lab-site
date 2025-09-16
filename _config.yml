@@ -4,6 +4,19 @@ description: Quantum sensing and nanoscale physics research at Northeastern Univ
 url: "https://yourusername.github.io" # Replace with your GitHub Pages URL
 baseurl: "" # Leave empty if repo is named username.github.io, otherwise use "/repository-name"
 
+# COLOR THEME SELECTION
+# Choose from: 
+#   "default"           (Original blue gradient)
+#   "purple-teal"       (Modern scientific - purple to teal)
+#   "forest-gold"       (Academic prestige - green with gold accents)  
+#   "charcoal-crimson"  (Bold & sophisticated)
+#   "navy-coral"        (Approachable scientific)
+#   "burgundy-gray"     (Elegant research)
+#   "ocean"             (Natural science - cyan gradient)
+#   "slate-orange"      (Modern tech - gray with orange accents)
+#   "plum-rose"         (Innovative & warm)
+color_theme: "ocean"  # Change this to switch color schemes!
+
 # Build settings
 markdown: kramdown
 theme: minima # You can change or remove this if using custom styling

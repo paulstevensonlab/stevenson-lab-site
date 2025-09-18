@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/stevenson-lab-site/static/css/main.12a5e373.css",
-    "main.js": "/stevenson-lab-site/static/js/main.a03bdd8c.js",
+    "main.js": "/stevenson-lab-site/static/js/main.022c87cd.js",
     "static/js/453.2e4e6879.chunk.js": "/stevenson-lab-site/static/js/453.2e4e6879.chunk.js",
     "index.html": "/stevenson-lab-site/index.html",
     "main.12a5e373.css.map": "/stevenson-lab-site/static/css/main.12a5e373.css.map",
-    "main.a03bdd8c.js.map": "/stevenson-lab-site/static/js/main.a03bdd8c.js.map",
+    "main.022c87cd.js.map": "/stevenson-lab-site/static/js/main.022c87cd.js.map",
     "453.2e4e6879.chunk.js.map": "/stevenson-lab-site/static/js/453.2e4e6879.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.12a5e373.css",
-    "static/js/main.a03bdd8c.js"
+    "static/js/main.022c87cd.js"
   ]
 }

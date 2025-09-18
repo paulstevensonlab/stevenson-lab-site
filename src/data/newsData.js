@@ -8,7 +8,6 @@ export const newsItems = [
     categoryColor: "orange",
     title: "New NIH MIRA Award for Biocompatible Quantum Sensors",
     summary: "We're excited to announce new support from the NIH! This MIRA award will enable the development of biocompatible nanoscale magnetic resonance tools using quantum sensors, allowing us to access biophysical dynamics in new and exciting ways.",
-    link: "#"
   },
   {
     id: 19,
@@ -17,10 +16,7 @@ export const newsItems = [
     categoryColor: "blue",
     title: "Two New Preprints on Multiferroic Systems",
     summary: "Two new preprints on the ArXiv imaging multiferroic systems! One shows how we can access highly nonlinear behaviors, while the second explores the interplay of topology and transport in BiFeO3.",
-    links: {
-      paper1: "https://arxiv.org/abs/2507.10724",
-      paper2: "https://arxiv.org/abs/2507.12633"
-    }
+    link: "https://arxiv.org/abs/2507.10724"
   },
   {
     id: 18,
@@ -29,7 +25,7 @@ export const newsItems = [
     categoryColor: "indigo",
     title: "Congratulations to Dr. Beaver!",
     summary: "Congratulations to the newly-minted Dr. Beaver! A great talk highlighting some great work - now just to finish up that last paper!",
-    link: "#"
+    image: `${process.env.PUBLIC_URL}/images/events/nb_grad.jpg`
   },
   {
     id: 17,
@@ -37,8 +33,8 @@ export const newsItems = [
     category: "PUBLICATION",
     categoryColor: "blue",
     title: "Imaging Flux Channeling with Quantum Sensors",
-    summary: "New work from the QMSI out now! See how NV centers can be used to map out time-varying magnetic fields in magnetic nanostructures, revealing flux channeling effects.",
-    link: "https://pubs.acs.org/doi/10.1021/acs.nanolett.5c02174"
+    summary: "New work from the QMSI out now! See how NV centers can be used to map out time-varying magnetic fields in magnetic nanostructures, revealing flux channeling effects",
+    link: "https://pubs.acs.org/doi/full/10.1021/acs.nanolett.5c02174"
   },
   {
     id: 16,
@@ -46,7 +42,9 @@ export const newsItems = [
     category: "CONFERENCE",
     categoryColor: "purple",
     title: "Northeastern Cross-College Magnetics Workshop",
-    summary: "Great day at the Northeastern Cross-College magnetics workshop. Nicole and Nathaniel presented their new work on magnetoacoustic devices and VLF AC sensing. Learn more about the event here: https://cos.northeastern.edu/news/northeasterns-boston-campus-hosts-inaugural-magnetics-workshop ",
+    summary: "Great day at the Northeastern Cross-College magnetics workshop. Nicole and Nathaniel presented their new work on magnetoacoustic devices and VLF AC sensing. ",
+    link: "https://cos.northeastern.edu/events/magnetics-workshop/",
+    image: `${process.env.PUBLIC_URL}/images/events/cc_mag.jpg`
   },
   {
     id: 15,
@@ -55,7 +53,7 @@ export const newsItems = [
     categoryColor: "blue",
     title: "Two New Joint Works on Magnetism in BiFeO3",
     summary: "Two new joint works on magnetism in BiFeO3, fresh off the press: Morphogenesis of spin cycloids in a noncollinear antiferromagnet.",
-    link: "https://doi.org/10.1073/pnas.242329812"
+    link: "https://doi.org/10.1073/pnas.2423298122"
   },
   {
     id: 14,
@@ -64,7 +62,7 @@ export const newsItems = [
     categoryColor: "blue",
     title: "Collaborative Work with UC Berkeley",
     summary: "New collaborative work with UC Berkeley out now - find out more about how defect emission can be tuned with local variations in crystal environment.",
-    link: "#"
+    link: "https://pubs.aip.org/aip/jap/article/137/13/134402/3342051"
   },
   {
     id: 13,
@@ -73,7 +71,7 @@ export const newsItems = [
     categoryColor: "orange",
     title: "AFOSR Young Investigator Program Award",
     summary: "We're excited to announce support from the AFOSR Young Investigator Program! Read more about how quantum sensing can help address problems at the intersection of biophysics and magnetics.",
-    link: "https://news.northeastern.edu/2025/03/18/quantum-computing-and-biology/"
+    link: "https://www.afosr.af.mil/News/Article-Display/Article/3307084/afosr-announces-2025-young-investigator-research-awards/"
   },
   {
     id: 12,
@@ -82,7 +80,6 @@ export const newsItems = [
     categoryColor: "yellow",
     title: "Nathaniel Wins Best Student Presentation at MRS",
     summary: "Congratulations to Nathaniel for winning 'Best Student Presentation' in the diamond session at MRS!",
-    link: "#"
   },
   {
     id: 11,
@@ -145,7 +142,7 @@ export const newsItems = [
     categoryColor: "blue",
     title: "Nature Communications Paper on BiFeO3 Magnetism",
     summary: "Our paper using scanning NV microscopy to image the magnetism in BiFeO3 is now online at Nature Communications! Find out more about how complex magnetic ordering can be controlled with electric fields.",
-    link: "https://rdcu.be/dDDD3"
+    link: "https://www.nature.com/articles/s41467-024-47232-5"
   },
   {
     id: 4,
@@ -163,7 +160,6 @@ export const newsItems = [
     categoryColor: "yellow",
     title: "Nicole Wins Poster Competition at BPS 2023",
     summary: "Congratulations to Nicole for winning the poster competition at BPS 2023!",
-    link: "#"
   },
   {
     id: 2,
@@ -172,7 +168,6 @@ export const newsItems = [
     categoryColor: "gray",
     title: "New Scanning NV Magnetometer Operational",
     summary: "The new scanning NV magnetometer is now operational at the EQUAL labs in Burlington! This tool enables nanoscale magnetic fields to be measured and imaged in a wide range of materials. Thanks to Qnami for the installation and excellent user training sessions!",
-    link: "#"
   },
   {
     id: 1,
@@ -181,7 +176,6 @@ export const newsItems = [
     categoryColor: "gray",
     title: "EQUAL Labs Launch Event",
     summary: "Great launch event for the Experiential Quantum Advancement Laboratories (EQUAL) at the Burlington Innovation Campus! New facilities include a scanning NV magnetometer, state-of-the-art ARPES systems and new material growth platforms.",
-    link: "#"
   }
 ];
 

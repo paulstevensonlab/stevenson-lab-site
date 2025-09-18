@@ -51,21 +51,33 @@ export const graduateStudents = [
 export const ugStudents = [
   {
     name: "Ky Farhadi",
-    photo: `${process.env.PUBLIC_URL}/images/team/undergrads/ky-farhadi.jpg`, // Update with actual path
+    photo: <img 
+          src={`${process.env.PUBLIC_URL}/images/team/students/kf.jpg`} 
+            alt="Ky Farhadi"
+            className="w-30 h-40 mx-auto mb-4 rounded-lg object-cover"
+          />,
     major: "Biochemistry",
     year: "Senior", // Optional
     project: null // Optional
   },
   {
     name: "Joshua Reid",
-    photo: `${process.env.PUBLIC_URL}/images/team/undergrads/joshua-reid.jpg`, // Update with actual path
+    photo: <img 
+          src={`${process.env.PUBLIC_URL}/images/team/students/new.png`} 
+            alt="Joshua Reid"
+            className="w-30 h-40 mx-auto mb-4 rounded-lg object-cover"
+          />,
     major: "Physics & Engineering",
     year: null,
     project: null
   },
   {
     name: "You?",
-    photo: `${process.env.PUBLIC_URL}/images/team/students/new.png`, // Update with actual path
+    photo: <img 
+          src={`${process.env.PUBLIC_URL}/images/team/students/new.png`} 
+            alt="??"
+            className="w-30 h-40 mx-auto mb-4 rounded-lg object-cover"
+          />,
     major: "Contact Paul to learn about undergraduate research opportunities",
     year: null,
     project: null

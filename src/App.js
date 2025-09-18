@@ -706,7 +706,7 @@ const ResearchPage = () => {
           {ugStudents.map((student, i) => (
             <div key={i} className="text-center">
               <div className="w-32 h-32 bg-gray-300 mx-auto mb-4 rounded-full flex items-center justify-center text-gray-500">
-                [Photo]
+                {student.photo}
               </div>
               <h3 className="font-semibold text-gray-900">{student.name}</h3>
               <p className="text-sm text-gray-600">{student.major}</p>
@@ -845,6 +845,11 @@ const ResearchPage = () => {
         <p className="text-gray-600 mb-4 leading-relaxed">
           {item.summary}
         </p>
+        {item.link && (
+          <div className="text-gray-600 mb-4 leading-relaxed">
+            <p><a href={item.link} target="_blank" rel="noopener noreferrer">Read more!</a></p>
+          </div>
+        )}
       </div>
     </article>
   ))}

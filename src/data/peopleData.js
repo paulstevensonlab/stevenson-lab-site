@@ -5,7 +5,7 @@ export const principalInvestigator = {
   title: "Assistant Professor",
   department: "Department of Physics",
   email: "p.stevenson@northeastern.edu",
-  photo: "/images/team/pi/stevenson.jpg", // Update with actual photo path
+  photo: `${process.env.PUBLIC_URL}/images/team/pi/stevenson.jpg`, // Update with actual photo path
   bio: "Dr. Stevenson leads the quantum sensing laboratory at Northeastern University, focusing on developing novel quantum sensors for applications in physics, chemistry, biology, and materials science.",
   links: {
     email: "p.stevenson@northeastern.edu",
@@ -29,7 +29,7 @@ export const graduateStudents = [
   {
     name: "Nicole Voce",
     photo: <img 
-          src="/images/team/students/nvoce.jpeg" 
+          src={`${process.env.PUBLIC_URL}/images/team/students/nvoce.jpeg`} 
             alt="Nicole Voce"
             className="w-40 h-34 mx-auto mb-4 rounded-lg object-cover"
           />,
@@ -39,7 +39,7 @@ export const graduateStudents = [
   {
     name: "You?",
     photo: <img 
-          src="/images/team/students/new.png" 
+          src={`${process.env.PUBLIC_URL}/images/team/students/new.png`} 
             alt="??"
             className="w-50 h-60 mx-auto mb-4 rounded-lg object-cover"
           />,
@@ -51,21 +51,21 @@ export const graduateStudents = [
 export const ugStudents = [
   {
     name: "Ky Farhadi",
-    photo: "/images/team/undergrads/ky-farhadi.jpg", // Update with actual path
+    photo: `${process.env.PUBLIC_URL}/images/team/undergrads/ky-farhadi.jpg`, // Update with actual path
     major: "Biochemistry",
     year: "Senior", // Optional
     project: null // Optional
   },
   {
     name: "Joshua Reid",
-    photo: "/images/team/undergrads/joshua-reid.jpg", // Update with actual path
+    photo: `${process.env.PUBLIC_URL}/images/team/undergrads/joshua-reid.jpg`, // Update with actual path
     major: "Physics & Engineering",
     year: null,
     project: null
   },
   {
     name: "You?",
-    photo: "/images/team/students/new.png", // Update with actual path
+    photo: `${process.env.PUBLIC_URL}/images/team/students/new.png`, // Update with actual path
     major: "Contact Paul to learn about undergraduate research opportunities",
     year: null,
     project: null
@@ -76,22 +76,20 @@ export const ugStudents = [
 export const pets = [
   {
     name: "Rockwell",
-    photo: "/images/team/pets/rockwell.jpg",
     title: "Assistant Purr-fessor",
     research: "Research area: Napping and catnip testing",
     photo: <img 
-          src="/images/team/pets/rockwell.jpg" 
+          src={`${process.env.PUBLIC_URL}/images/team/pets/rockwell.jpg`} 
             alt="Rockwell"
             className="w-40 h-40 mx-auto mb-4 rounded-lg object-cover"
           />,
   },
   {
     name: "Mimi",
-    photo: "/images/team/pets/mimi.jpg",
     title: "Paw-stdoctoral Researcher",
     research: "Research area: Chasing lasers",
     photo: <img 
-          src="/images/team/pets/mimi.jpg" 
+          src={`${process.env.PUBLIC_URL}/images/team/pets/mimi.jpg`} 
             alt="Mimi"
             className="w-40 h-40 mx-auto mb-4 rounded-lg object-cover"
           />,

@@ -2,6 +2,17 @@
 
 export const publications = [
   // Preprints
+  { 
+  id: 31,
+  year: "Preprint",
+  title: "Efficient Radiofrequency Sensing with Fluorescence Encoding",
+  authors: "Voce, N., Stevenson, P.",
+  journal: "arXiv",
+  arxiv: "2510.07510",
+  link: "https://arxiv.org/abs/2510.07510",
+  type: "preprint",
+  featured: false 
+},
 { 
   id: 30,
   year: "Preprint",

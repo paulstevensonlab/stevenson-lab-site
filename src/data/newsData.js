@@ -2,6 +2,15 @@
 
 export const newsItems = [
   {
+    id: 21,
+    date: "October  8, 2025",
+    category: "PUBLICATION",
+    categoryColor: "blue",
+    title: "Sensing RF fields with NV centers: preprint!",
+    summary: "Check out Nicole's new preprint on using NV centers to sense AC magnetic fields down to the VLF range!",
+    link: "https://arxiv.org/abs/2510.07510"
+  },
+  {
     id: 20,
     date: "September 1, 2025",
     category: "GRANT",

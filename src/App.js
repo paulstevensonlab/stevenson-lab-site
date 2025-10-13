@@ -8,60 +8,114 @@ import {
 } from './data/peopleData';
 import { Calendar, Users, BookOpen, Microscope, Award, FileText,
    Github, Twitter, Linkedin, GraduationCap, Beaker, Mail, Phone, 
-   MapPin, ExternalLink, Download, ChevronLeft, ChevronRight, Clock, ArrowRight } from 'lucide-react';
+   MapPin, ExternalLink, Download, ChevronLeft, ChevronRight, Clock, ArrowRight, Menu, X } from 'lucide-react';
 
 
 
 const MinimalSidebarApp = () => {
   const [currentPage, setCurrentPage] = useState('home');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  // Sidebar Component
+  // Reset mobile menu state when resizing to desktop
+  // (On desktop, sidebar is always visible via CSS, this just cleans up the mobile state)
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setSidebarOpen(false); // Reset mobile menu state
+      }
+    };
+    
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Check initial size
+    
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Close sidebar when page changes on mobile
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    if (window.innerWidth < 768) {
+      setSidebarOpen(false);
+    }
+  };
+
+  // Sidebar Component with mobile responsiveness
   const Sidebar = () => (
-    <div className="fixed left-0 top-0 h-full w-64 bg-gray-900 text-white p-8 z-50">
-      <div className="mb-12">
-        <h2 className="text-2xl font-bold mb-2">STEVENSON GROUP</h2>
-        <p className="text-gray-400 text-sm">Quantum Sensing at the Nanoscale</p>
-      </div>
+    <>
+      {/* Mobile menu button - only visible on small screens */}
+      <button
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+        className="fixed top-4 left-4 z-50 md:hidden bg-gray-900 text-white p-3 rounded-lg shadow-lg hover:bg-gray-800 transition-colors"
+        aria-label="Toggle menu"
+      >
+        {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
+      </button>
       
-      <nav className="space-y-4">
-        {[
-          { id: 'home', label: 'Home' },
-          { id: 'about', label: 'About' },
-          { id: 'research', label: 'Research' },
-          { id: 'publications', label: 'Publications' },
-          { id: 'team', label: 'Team' },
-          { id: 'news', label: 'News' },
-          { id: 'resources', label: 'Resources' },
-          { id: 'contact', label: 'Contact' }
-        ].map(item => (
-          <a
-            key={item.id}
-            href="#"
-            onClick={(e) => {
-              e.preventDefault();
-              setCurrentPage(item.id);
-            }}
-            className={`block py-2 px-4 transition-colors ${
-              currentPage === item.id
-                ? 'bg-gray-800 text-white border-l-4 border-yellow-500' 
-                : 'text-gray-400 hover:text-white hover:bg-gray-800'
-            }`}
-          >
-            {item.label}
-          </a>
-        ))}
-      </nav>
+      {/* Mobile overlay - only appears when sidebar is open on mobile */}
+      {sidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+          aria-hidden="true"
+        />
+      )}
       
-      <div className="absolute bottom-8 left-8 right-8">
-        <p className="text-xs text-gray-500">© 2025 Stevenson Lab</p>
+      {/* Sidebar - responsive behavior */}
+      <div className={`
+        fixed left-0 top-0 h-full w-64 bg-gray-900 text-white p-8 z-50
+        transition-transform duration-300 ease-in-out
+        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+        md:translate-x-0
+      `}>
+        {/* 
+          Mobile: controlled by sidebarOpen state (slides in/out)
+          Desktop: always visible (md:translate-x-0 overrides the state)
+        */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold mb-2">STEVENSON GROUP</h2>
+          <p className="text-gray-400 text-sm">Quantum Sensing at the Nanoscale</p>
+        </div>
+        
+        <nav className="space-y-4">
+          {[
+            { id: 'home', label: 'Home' },
+            { id: 'about', label: 'About' },
+            { id: 'research', label: 'Research' },
+            { id: 'publications', label: 'Publications' },
+            { id: 'team', label: 'Team' },
+            { id: 'news', label: 'News' },
+            { id: 'resources', label: 'Resources' },
+            { id: 'contact', label: 'Contact' }
+          ].map(item => (
+            <a
+              key={item.id}
+              href="#"
+              onClick={(e) => {
+                e.preventDefault();
+                handlePageChange(item.id);
+              }}
+              className={`block py-2 px-4 transition-colors ${
+                currentPage === item.id
+                  ? 'bg-gray-800 text-white border-l-4 border-yellow-500' 
+                  : 'text-gray-400 hover:text-white hover:bg-gray-800'
+              }`}
+            >
+              {item.label}
+            </a>
+          ))}
+        </nav>
+        
+        <div className="absolute bottom-8 left-8 right-8">
+          <p className="text-xs text-gray-500">© 2025 Stevenson Lab</p>
+        </div>
       </div>
-    </div>
+    </>
   );
 
 const HomePage = () => (
   <div>
-    {/* Hero Section */}
-    <section className="min-h-screen flex items-center px-16 relative overflow-hidden">
+    {/* Hero Section with responsive padding and text */}
+    <section className="min-h-screen flex items-center px-8 md:px-12 lg:px-16 relative overflow-hidden">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
       
@@ -75,27 +129,27 @@ const HomePage = () => (
         }}
       ></div>
       
-      {/* Content */}
+      {/* Content with responsive text sizes */}
       <div className="max-w-4xl relative z-10">
-        <h1 className="text-6xl font-light text-gray-900 mb-6">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-light text-gray-900 mb-6">
           Shining Light on
           <span className="font-bold block mt-2">Single Spins</span>
         </h1>
-        <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+        <p className="text-lg md:text-xl text-gray-600 mb-12 leading-relaxed">
           We are an interdisciplinary quantum sensing laboratory developing cutting-edge technologies 
           to probe matter at the atomic scale, spanning applications in chemistry, physics, biology, 
           and materials science.
         </p>
-        <div className="flex items-center space-x-8">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
           <button 
-            onClick={() => setCurrentPage('research')}
-            className="text-xl text-gray-900 font-semibold hover:underline"
+            onClick={() => handlePageChange('research')}
+            className="text-lg md:text-xl text-gray-900 font-semibold hover:underline"
           >
             Explore Research →
           </button>
           <button 
-            onClick={() => setCurrentPage('publications')}
-            className="text-xl text-gray-900 font-semibold hover:underline"
+            onClick={() => handlePageChange('publications')}
+            className="text-lg md:text-xl text-gray-900 font-semibold hover:underline"
           >
             Recent Publications →
           </button>
@@ -104,7 +158,8 @@ const HomePage = () => (
     </section>
   </div>
 );
-  // Image Carousel Component
+
+  // Image Carousel Component with responsive height
 const ImageCarousel = () => {
   const images = [
     { src: `${process.env.PUBLIC_URL}/images/research/tirf.jpg`, alt: 'NV fluorescence' },
@@ -131,7 +186,7 @@ const ImageCarousel = () => {
   }, [currentIndex]);
 
   return (
-    <div className="relative w-full h-96 group">
+    <div className="relative w-full h-64 md:h-80 lg:h-96 group">
       {/* Main image display */}
       <div className="relative h-full overflow-hidden rounded-lg shadow-lg">
         <div 
@@ -152,17 +207,17 @@ const ImageCarousel = () => {
       {/* Previous button */}
       <button
         onClick={goToPrevious}
-        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-1.5 md:p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
       >
-        <ChevronLeft size={24} />
+        <ChevronLeft className="w-5 h-5 md:w-6 md:h-6" />
       </button>
 
       {/* Next button */}
       <button
         onClick={goToNext}
-        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+        className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 text-white p-1.5 md:p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
       >
-        <ChevronRight size={24} />
+        <ChevronRight className="w-5 h-5 md:w-6 md:h-6" />
       </button>
 
       {/* Dots indicator */}
@@ -183,30 +238,30 @@ const ImageCarousel = () => {
   );
 };
 
-  // About Page
+  // About Page with responsive layout
   const AboutPage = () => (
-    <div className="px-16 py-12">
+    <div className="px-8 py-8 md:px-12 md:py-10 lg:px-16 lg:py-12">
       <div className="max-w-4xl">
-        <h1 className="text-5xl font-light text-gray-900 mb-8">About Us</h1>
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-8">About Us</h1>
         
         <div className="prose prose-lg max-w-none">
-          <p className="text-xl text-gray-600 mb-8">
+          <p className="text-lg md:text-xl text-gray-600 mb-8">
             The Stevenson group was established in 2021 to develop new quantum sensing approaches using solid state spins, and
             use these techniques to answer outstanding questions in chemistry, biology, and magnetism. 
           </p>
 
           <section className="mb-12">
-          <h2 className="text-3xl font-light text-gray-900 mb-4">The NV Center</h2>
-              {/* Two-column layout for text and image */}
-              <div className="grid md:grid-cols-2 gap-8 items-start">
+          <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-4">The NV Center</h2>
+              {/* Two-column layout - stack on mobile */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                 {/* Left column - Text */}
                 <div>
-                  <p className="text-gray-600 leading-relaxed mb-4">
+                  <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-4">
                     Our primary tool is the nitrogen vacancy (NV) center in diamond. This system has some remarkable properties, 
                     including long <b>room temperature spin coherence</b> and <b>spin-dependent fluorescence</b>, enabling us to optically read 
                     out the spin state of the NV center and how it interacts with magnetic fields and other spin states.
                   </p>
-                  <p className="text-gray-600 leading-relaxed mb-4">
+                  <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-4">
                     For a more comprehensive overview of the NV center and its applications in quantum sensing, quantum communication,
                     and quantum computing, check out this review in <b><a href="https://www.nature.com/articles/s42254-021-00283-9" className="text-yellow-600 hover:underline">Nature Reviews Physics</a></b>.
                   </p>
@@ -223,7 +278,7 @@ const ImageCarousel = () => {
                       e.target.src = 'https://via.placeholder.com/500x400?text=NV+Center+Diagram';
                     }}
                   />
-                  <p className="text-sm text-black-500 text-center mt-3 italic">
+                  <p className="text-xs md:text-sm text-black-500 text-center mt-3 italic">
                     Nitrogen vacancy (NV) centers are fluorescent, S=1, defects in the diamond lattice 
                     consisting of a nitrogen atom adjacent to a vacant site.
                   </p>
@@ -232,33 +287,33 @@ const ImageCarousel = () => {
           </section>
 
           <section className="mb-12">
-            <h2 className="text-3xl font-light text-gray-900 mb-4">Our Approach</h2>
-            <div className="flex gap-8 items-start">
+            <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-4">Our Approach</h2>
+            <div className="flex flex-col lg:flex-row gap-8 items-start">
               {/* Left side - Text content */}
               <div className="flex-1 space-y-4">
-                  <p className="text-gray-600">The research problems we tackle lie at the intersection of many 
+                  <p className="text-base md:text-lg text-gray-600">The research problems we tackle lie at the intersection of many 
                     distinct fields, so the techniques we use are equally diverse, spanning optics, microwave engineering,
                     materials science, chemistry, and biology. </p>
 
-                    <p className="text-gray-600">Our group develops new instrumentation approaches - for example, total internal reflection (TIRF) geometries
+                    <p className="text-base md:text-lg text-gray-600">Our group develops new instrumentation approaches - for example, total internal reflection (TIRF) geometries
                      - to enable biocompatible quantum sensing experiments. We also develop new approaches to integrating quantum sensors into complex
                      materials systems to probe magnetism with new levels of sensitivity and spatial resolution.</p>
 
-                    <p className="text-gray-600">These new techniques allow us to probe nanoscale dynamics in a wide range of systems, from aptamers to antiferromagnets. 
+                    <p className="text-base md:text-lg text-gray-600">These new techniques allow us to probe nanoscale dynamics in a wide range of systems, from aptamers to antiferromagnets. 
                       Learn more about our research <button 
-            onClick={() => setCurrentPage('research')} className="text-yellow-600 font-semibold hover:underline">here</button>.</p>
+            onClick={() => handlePageChange('research')} className="text-yellow-600 font-semibold hover:underline">here</button>.</p>
               </div>
               
               {/* Right side - Image Carousel */}
-              <div className="flex-1 max-w-md">
+              <div className="flex-1 max-w-md mx-auto lg:mx-0">
                 <ImageCarousel />
               </div>
             </div>
           </section>
           <section className="mb-12">
-                    <h2 className="text-3xl font-light text-gray-900 mb-4">Support</h2>
+                    <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-4">Support</h2>
                           <div>
-                            <p className="text-gray-600 leading-relaxed mb-4">
+                            <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-4">
                               Our work is supported by the Air Force Office of Scientific Research (AFOSR) and the National Institutes of Health (NIH).
                             </p>
                           </div>
@@ -268,7 +323,7 @@ const ImageCarousel = () => {
     </div>
   );
 
-  // Research Page
+  // Research Page with responsive layout
 const ResearchPage = () => {
   const [selectedResearch, setSelectedResearch] = useState(0); // Track which research area is selected
 
@@ -331,11 +386,11 @@ const ResearchPage = () => {
   ];
 
   return (
-    <div className="px-16 py-12">
-      <h1 className="text-5xl font-light text-gray-900 mb-12">Research Focus</h1>
+    <div className="px-8 py-8 md:px-12 md:py-10 lg:px-16 lg:py-12">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-12">Research Focus</h1>
       
-      {/* Research Areas Grid */}
-      <div className="grid md:grid-cols-3 gap-12 mb-16">
+      {/* Research Areas Grid - responsive columns */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 mb-16">
         {researchAreas.map((item, i) => (
           <div 
             key={i} 
@@ -344,16 +399,16 @@ const ResearchPage = () => {
             }`}
             onClick={() => setSelectedResearch(i)}
           >
-            <div className="flex space-x-6 mb-4">
-              <div className={`text-6xl font-bold transition-colors ${
+            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6 mb-4">
+              <div className={`text-5xl md:text-6xl font-bold transition-colors ${
                 selectedResearch === i ? 'text-yellow-500' : 'text-gray-200'
               }`}>
                 {item.number}
               </div>
               <div>
-                <h3 className="text-2xl font-semibold text-gray-900 mb-3">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed mb-3">{item.desc}</p>
-                <button className={`mt-4 font-semibold transition-colors ${
+                <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3">{item.title}</h3>
+                <p className="text-sm md:text-base text-gray-600 leading-relaxed mb-3">{item.desc}</p>
+                <button className={`mt-4 font-semibold transition-colors text-sm md:text-base ${
                   selectedResearch === i ? 'text-yellow-600' : 'text-gray-500 hover:text-yellow-600'
                 }`}>
                   {selectedResearch === i ? 'Currently viewing ↓' : 'Learn more →'}
@@ -370,39 +425,39 @@ const ResearchPage = () => {
       {/* Detailed View Section */}
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
-          <h2 className="text-3xl font-light text-gray-900 mb-4">
+          <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-4">
             {researchAreas[selectedResearch].title}
           </h2>
-          <p className="text-lg text-gray-600 leading-relaxed">
+          <p className="text-base md:text-lg text-gray-600 leading-relaxed">
             {researchAreas[selectedResearch].detailedContent.overview}
           </p>
         </div>
 
-        {/* Detailed Content Sections */}
+        {/* Detailed Content Sections - responsive flex direction */}
         <div className="space-y-12">
           {researchAreas[selectedResearch].detailedContent.sections.map((section, index) => (
             <div 
               key={index} 
-              className={`flex gap-8 items-center ${
-                index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+              className={`flex flex-col lg:flex-row gap-8 items-center ${
+                index % 2 === 0 ? '' : 'lg:flex-row-reverse'
               }`}
             >
               {/* Text Content */}
               <div className="flex-1">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-3">
                   {section.heading}
                 </h3>
-                <p className="text-gray-600 leading-relaxed">
+                <p className="text-sm md:text-base text-gray-600 leading-relaxed">
                   {section.text}
                 </p>
               </div>
 
               {/* Image */}
-              <div className="flex-1 max-w-md">
+              <div className="flex-1 w-full lg:max-w-md">
                 <img 
                   src={section.image} 
                   alt={section.heading}
-                  className="w-full h-50 object-cover rounded-lg shadow-lg"
+                  className="w-full h-auto rounded-lg shadow-lg"
                   onError={(e) => {
                     // Fallback to placeholder if image doesn't exist
                     e.target.src = `https://via.placeholder.com/500x300?text=${section.heading.replace(/ /g, '+')}`;
@@ -415,12 +470,12 @@ const ResearchPage = () => {
 
         {/* Related Publications or Additional Info */}
         <div className="mt-16 p-6 bg-gray-50 rounded-lg">
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">
+          <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">
             Recent Publications in {researchAreas[selectedResearch].title}
           </h3>
-          <p className="text-gray-600">
+          <p className="text-sm md:text-base text-gray-600">
             See our <button 
-              onClick={() => setCurrentPage('publications')} 
+              onClick={() => handlePageChange('publications')} 
               className="text-yellow-600 hover:underline"
             >
               publications page
@@ -432,7 +487,7 @@ const ResearchPage = () => {
   );
 };
 
-// Publications Page
+// Publications Page with responsive layout
   const PublicationsPage = () => {
     // Publications data is imported at the top of the file
     
@@ -482,30 +537,30 @@ const ResearchPage = () => {
     };
 
     return (
-      <div className="px-16 py-12">
+      <div className="px-8 py-8 md:px-12 md:py-10 lg:px-16 lg:py-12">
         {/* Header and Filters */}
         <div className="mb-8">
-          <h1 className="text-5xl font-light text-gray-900 mb-6">Publications</h1>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-6">Publications</h1>
           
           {/* Search Bar */}
           <div className="mb-6">
             <input
               type="text"
-              placeholder="Search publications by title, author, or journal..."
+              placeholder="Search publications..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-yellow-500"
             />
           </div>
 
-          {/* Filter Buttons */}
-          <div className="flex flex-wrap gap-4 justify-between items-center">
+          {/* Filter Buttons - responsive wrap */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
             <div className="flex flex-wrap gap-2">
               {years.map(year => (
                 <button
                   key={year}
                   onClick={() => setSelectedYear(year)}
-                  className={`px-4 py-2 rounded transition-colors ${
+                  className={`px-3 py-1.5 md:px-4 md:py-2 rounded transition-colors text-sm md:text-base ${
                     selectedYear === year 
                       ? "bg-yellow-600 text-white" 
                       : "bg-gray-200 text-gray-700 hover:bg-gray-300"
@@ -516,16 +571,16 @@ const ResearchPage = () => {
               ))}
             </div>
             
-            <div className="text-sm text-gray-600">
+            <div className="text-xs md:text-sm text-gray-600">
               {filteredPublications.length} publication{filteredPublications.length !== 1 ? 's' : ''} found
             </div>
           </div>
 
-          {/* Type Filter */}
-          <div className="flex gap-2 mt-4">
+          {/* Type Filter - responsive */}
+          <div className="flex flex-wrap gap-2 mt-4">
             <button
               onClick={() => setSelectedType("all")}
-              className={`px-3 py-1 text-sm rounded ${
+              className={`px-2 py-1 md:px-3 text-xs md:text-sm rounded ${
                 selectedType === "all" ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
             >
@@ -533,7 +588,7 @@ const ResearchPage = () => {
             </button>
             <button
               onClick={() => setSelectedType("article")}
-              className={`px-3 py-1 text-sm rounded ${
+              className={`px-2 py-1 md:px-3 text-xs md:text-sm rounded ${
                 selectedType === "article" ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
             >
@@ -541,7 +596,7 @@ const ResearchPage = () => {
             </button>
             <button
               onClick={() => setSelectedType("preprint")}
-              className={`px-3 py-1 text-sm rounded ${
+              className={`px-2 py-1 md:px-3 text-xs md:text-sm rounded ${
                 selectedType === "preprint" ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
             >
@@ -549,7 +604,7 @@ const ResearchPage = () => {
             </button>
             <button
               onClick={() => setSelectedType("news-views")}
-              className={`px-3 py-1 text-sm rounded ${
+              className={`px-2 py-1 md:px-3 text-xs md:text-sm rounded ${
                 selectedType === "news-views" ? "bg-gray-700 text-white" : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               }`}
             >
@@ -567,32 +622,32 @@ const ResearchPage = () => {
           }).map(year => (
             <div key={year}>
               {/* Year Header */}
-              <h2 className="text-2xl font-light text-gray-700 mb-4 pb-2 border-b border-gray-200">
+              <h2 className="text-xl md:text-2xl font-light text-gray-700 mb-4 pb-2 border-b border-gray-200">
                 {year}
               </h2>
               
-              {/* Publications for this year */}
+              {/* Publications for this year - responsive padding */}
               <div className="space-y-4">
                 {groupedPublications[year].map(pub => (
-                  <div key={pub.id} className={`bg-white p-6 border-l-4 ${getBorderColor(pub)} hover:shadow-lg transition-shadow`}>
+                  <div key={pub.id} className={`bg-white p-4 md:p-6 border-l-4 ${getBorderColor(pub)} hover:shadow-lg transition-shadow`}>
                     <div className="flex justify-between items-start">
                       <div className="flex-1">
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                        <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-2">
                           {pub.title}
                         </h3>
                         
-                        <p className="text-gray-600 mb-2">
+                        <p className="text-sm md:text-base text-gray-600 mb-2">
                           {pub.authors}
                         </p>
                         
-                        <p className="text-gray-800 font-medium mb-3">
+                        <p className="text-sm md:text-base text-gray-800 font-medium mb-3">
                           <span className="italic">{pub.journal}</span>
                           {pub.volume && `, ${pub.volume}`}
                           {pub.pages && `, ${pub.pages}`}
                           {pub.year !== "Preprint" && ` (${pub.year})`}
                         </p>
                         
-                        <div className="flex flex-wrap gap-3 text-sm">
+                        <div className="flex flex-wrap gap-2 md:gap-3 text-xs md:text-sm">
                           {pub.doi && (
                             <a href={pub.link} className="text-yellow-600 hover:underline" target="_blank" rel="noopener noreferrer">
                               DOI: {pub.doi}
@@ -650,132 +705,130 @@ const ResearchPage = () => {
     );
   };
 
-  // Team Page
+  // Team Page with responsive grid
   const TeamPage = () => (
-    <div className="px-16 py-12">
-      <h1 className="text-5xl font-light text-gray-900 mb-12">Our Team</h1>
+    <div className="px-8 py-8 md:px-12 md:py-10 lg:px-16 lg:py-12">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-12">Our Team</h1>
       
-      {/* Principal Investigator */}
+      {/* Principal Investigator - responsive layout */}
       <section className="mb-16">
-        <h2 className="text-3xl font-light text-gray-900 mb-8">Principal Investigator</h2>
-        <div className="bg-white p-8 flex space-x-8">
+        <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-8">Principal Investigator</h2>
+        <div className="bg-white p-6 md:p-8 flex flex-col md:flex-row gap-6 md:gap-8">
           <img 
           src={`${process.env.PUBLIC_URL}/images/team/pi/NUheadshot.jpg`} 
             alt="Dr. Stevenson"
-            className="w-60 h-90 object-cover rounded-lg"
+            className="w-full md:w-60 h-auto md:h-90 object-cover rounded-lg"
           />
           <div>
-            <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+            <h3 className="text-xl md:text-2xl font-semibold text-gray-900 mb-2">
               Paul Stevenson
             </h3>
-            <p className="text-gray-600 mb-4">Assistant Professor<br />
+            <p className="text-sm md:text-base text-gray-600 mb-4">Assistant Professor<br />
             Department of Physics, 
             Northeastern University</p>
-            <p className="text-gray-600 mb-4 leading-relaxed">
+            <p className="text-sm md:text-base text-gray-600 mb-4 leading-relaxed">
               PhD, Massachusetts Institute of Technology (2017)<br />
               M. Chem, University of Oxford (2011)<br />
             </p>
-            <div className="flex flex-col space-y-4">
-              <a href="mailto:p.stevenson@northeastern.edu" className="text-yellow-600 hover:underline">Email</a>
-              <a href="https://scholar.google.com/citations?user=7gR40hsAAAAJ&hl=en" className="text-yellow-600 hover:underline">Google Scholar</a>
-              <a href="https://orcid.org/0000-0002-6616-0328" className="text-yellow-600 hover:underline">ORCID: 0000-0002-6616-0328</a>
+            <div className="flex flex-col space-y-2 md:space-y-4">
+              <a href="mailto:p.stevenson@northeastern.edu" className="text-yellow-600 hover:underline text-sm md:text-base">Email</a>
+              <a href="https://scholar.google.com/citations?user=7gR40hsAAAAJ&hl=en" className="text-yellow-600 hover:underline text-sm md:text-base">Google Scholar</a>
+              <a href="https://orcid.org/0000-0002-6616-0328" className="text-yellow-600 hover:underline text-sm md:text-base">ORCID: 0000-0002-6616-0328</a>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Graduate Students */}
+      {/* Graduate Students - responsive grid */}
       <section className="mb-16">
-        <h2 className="text-3xl font-light text-gray-900 mb-8">Graduate Students</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-8">Graduate Students</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {graduateStudents.map((student, i) => (
             <div key={i} className="text-center">
                 {student.photo}
-              <h3 className="font-semibold text-gray-900">{student.name}</h3>
-              <p className="text-sm text-gray-600">{student.degree}</p>
+              <h3 className="font-semibold text-gray-900 text-sm md:text-base">{student.name}</h3>
+              <p className="text-xs md:text-sm text-gray-600">{student.degree}</p>
               <p className="text-xs text-gray-500">{student.research}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Undergraduate Students */}
+      {/* Undergraduate Students - responsive grid */}
       <section className="mb-16">
-        <h2 className="text-3xl font-light text-gray-900 mb-8">Undergraduate Students</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-8">Undergraduate Students</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
           {ugStudents.map((student, i) => (
             <div key={i} className="text-center">
-              <div className="w-32 h-32 bg-gray-300 mx-auto mb-4 rounded-full flex items-center justify-center text-gray-500">
+              <div className="w-24 h-24 md:w-32 md:h-32 bg-gray-300 mx-auto mb-4 rounded-full flex items-center justify-center text-gray-500">
                 {student.photo}
               </div>
-              <h3 className="font-semibold text-gray-900">{student.name}</h3>
-              <p className="text-sm text-gray-600">{student.major}</p>
+              <h3 className="font-semibold text-gray-900 text-sm md:text-base">{student.name}</h3>
+              <p className="text-xs md:text-sm text-gray-600">{student.major}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Research Associates */}
+      {/* Research Associates - responsive grid */}
       <section className="mb-16">
-        <h2 className="text-3xl font-light text-gray-900 mb-8">Research Associates</h2>
-        <div className="grid md:grid-cols-3 gap-6">
+        <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-8">Research Associates</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {pets.map((student, i) => (
             <div key={i} className="text-center">
                 {student.photo}
-              <h3 className="font-semibold text-gray-900">{student.name}</h3>
-              <p className="text-sm text-gray-600">{student.title}</p>
+              <h3 className="font-semibold text-gray-900 text-sm md:text-base">{student.name}</h3>
+              <p className="text-xs md:text-sm text-gray-600">{student.title}</p>
               <p className="text-xs text-gray-500">{student.research}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Alumni */}
+      {/* Alumni - responsive grid */}
       <section>
-        <h2 className="text-3xl font-light text-gray-900 mb-8">Alumni</h2>
-        <div className="grid md:grid-cols-2 gap-8">
+        <h2 className="text-2xl md:text-3xl font-light text-gray-900 mb-8">Alumni</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Graduate Student Alumni */}
-          <div className="bg-gray-50 p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Graduate Student Alumni</h3>
+          <div className="bg-gray-50 p-4 md:p-6">
+            <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">Graduate Student Alumni</h3>
             <div className="space-y-3">
               <div className="border-l-3 border-yellow-500 pl-4">
-                <p className="font-medium text-gray-800">Nathanial Beaver, PhD 2025</p>
-                <p className="text-sm text-gray-600">Thesis: Advanced Drive Methods for Sensing with Diamond NV Centers.  
+                <p className="font-medium text-gray-800 text-sm md:text-base">Nathanial Beaver, PhD 2025</p>
+                <p className="text-xs md:text-sm text-gray-600">Thesis: Advanced Drive Methods for Sensing with Diamond NV Centers.  
                  <a href="https://hdl.handle.net/2047/D20776349" className="text-blue-600 hover:underline"> [Link]</a>
                 </p>
-                {/* <p className="text-sm text-gray-600">Current: [Position at Institution/Company]</p> */}
               </div>
               <div className="border-l-3 border-yellow-500 pl-4">
-                <p className="font-medium text-gray-800">Brian Menezes, MS 2021</p>
-                {/* <p className="text-sm text-gray-600">Current: [Position at Institution/Company]</p> */}
+                <p className="font-medium text-gray-800 text-sm md:text-base">Brian Menezes, MS 2021</p>
               </div>
             </div>
           </div>
 
           {/* Undergraduate Alumni */}
-          <div className="bg-gray-50 p-6">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Undergraduate Alumni</h3>
-            <div className="space-y-3">
+          <div className="bg-gray-50 p-4 md:p-6">
+            <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">Undergraduate Alumni</h3>
+            <div className="space-y-2 md:space-y-3">
               <div className="border-l-3 border-gray-400 pl-4">
-                <p className="font-medium text-gray-800">Tin Fe Sophal, 2025</p>
+                <p className="font-medium text-gray-800 text-sm md:text-base">Tin Fe Sophal, 2025</p>
               </div>
               <div className="border-l-3 border-gray-400 pl-4">
-                <p className="font-medium text-gray-800">Ruby Martin-Gulutzan, 2024</p>
+                <p className="font-medium text-gray-800 text-sm md:text-base">Ruby Martin-Gulutzan, 2024</p>
               </div>
               <div className="border-l-3 border-gray-400 pl-4">
-                <p className="font-medium text-gray-800">Tristan Bernard, 2024</p>
+                <p className="font-medium text-gray-800 text-sm md:text-base">Tristan Bernard, 2024</p>
               </div>
               <div className="border-l-3 border-gray-400 pl-4">
-                <p className="font-medium text-gray-800">Deliah Jasper, 2024</p>
+                <p className="font-medium text-gray-800 text-sm md:text-base">Deliah Jasper, 2024</p>
               </div>
               <div className="border-l-3 border-gray-400 pl-4">
-                <p className="font-medium text-gray-800">Alena Alexander, 2022</p>
+                <p className="font-medium text-gray-800 text-sm md:text-base">Alena Alexander, 2022</p>
               </div>
               <div className="border-l-3 border-gray-400 pl-4">
-                <p className="font-medium text-gray-800">Ziven Lopez, 2022</p>
+                <p className="font-medium text-gray-800 text-sm md:text-base">Ziven Lopez, 2022</p>
               </div>
               <div className="border-l-3 border-gray-400 pl-4">
-                <p className="font-medium text-gray-800">Donelle Furline Jr, 2021</p>
+                <p className="font-medium text-gray-800 text-sm md:text-base">Donelle Furline Jr, 2021</p>
               </div>
             </div>
           </div>
@@ -784,10 +837,8 @@ const ResearchPage = () => {
     </div>
   );
 
-  // News Page
+  // News Page with responsive layout
   const NewsPage = () => {
-    // Import news data at the top of the component
-
     const getCategoryStyles = (color) => {
       const styles = {
         yellow: "bg-yellow-100 text-yellow-800",
@@ -815,18 +866,18 @@ const ResearchPage = () => {
     };
 
     return (
-      <div className="px-16 py-12">
-        <h1 className="text-5xl font-light text-gray-900 mb-12">News & Updates</h1>
+      <div className="px-8 py-8 md:px-12 md:py-10 lg:px-16 lg:py-12">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-12">News & Updates</h1>
         {newsItems
         .sort((a, b) => b.id - a.id)  // Sort by ID, highest first
   .map((item) => (
     <article key={item.id}>
-      <div className={`bg-white p-8 border-l-4 ${getBorderColor(item.categoryColor)}`}>
-        <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
+      <div className={`bg-white p-6 md:p-8 border-l-4 ${getBorderColor(item.categoryColor)}`}>
+        <div className="flex items-center space-x-4 text-xs md:text-sm text-gray-500 mb-3">
           <Calendar className="w-4 h-4" />
           <span>{item.date}</span>
         </div>
-        <h2 className="text-2xl font-semibold text-gray-900 mb-3">
+        <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3">
           {item.title}
         </h2>
         {/* Conditionally render image if it exists */}
@@ -835,19 +886,19 @@ const ResearchPage = () => {
         <img 
           src={item.image} 
           alt={item.imageAlt || item.title}
-          className="w-full h-64 object-cover rounded-lg"
+          className="w-full h-48 md:h-64 object-cover rounded-lg"
           onError={(e) => {
             e.target.style.display = 'none'; // Hide if image fails to load
           }}
         />
       </div>
     )}
-        <p className="text-gray-600 mb-4 leading-relaxed">
+        <p className="text-sm md:text-base text-gray-600 mb-4 leading-relaxed">
           {item.summary}
         </p>
         {item.link && (
-          <div className="text-gray-600 mb-4 leading-relaxed">
-            <p><a href={item.link} target="_blank" rel="noopener noreferrer">Read more!</a></p>
+          <div className="text-sm md:text-base text-gray-600 mb-4 leading-relaxed">
+            <p><a href={item.link} target="_blank" rel="noopener noreferrer" className="text-yellow-600 hover:underline">Read more!</a></p>
           </div>
         )}
       </div>
@@ -858,81 +909,78 @@ const ResearchPage = () => {
     );
   };
 
-  // Resources Page
+  // Resources Page with responsive grid
   const ResourcesPage = () => (
-    <div className="px-16 py-12">
-      <h1 className="text-5xl font-light text-gray-900 mb-12">Resources</h1>
+    <div className="px-8 py-8 md:px-12 md:py-10 lg:px-16 lg:py-12">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-12">Resources</h1>
       
-      <div className="grid md:grid-cols-2 gap-8 mb-12">
-        <div className="bg-white p-8 border-l-4 border-yellow-500">
-          <Beaker className="w-12 h-12 text-yellow-600 mb-4" />
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">Protocols & Methods</h2>
-          <p className="text-gray-600 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div className="bg-white p-6 md:p-8 border-l-4 border-yellow-500">
+          <Beaker className="w-10 h-10 md:w-12 md:h-12 text-yellow-600 mb-4" />
+          <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3">Protocols & Methods</h2>
+          <p className="text-sm md:text-base text-gray-600 mb-4">
             We use <a href="https://protocols.io/workspaces/stevenson-group" className="text-yellow-600 hover:underline">protocols.io</a> to expand on the methods section of our publications. Some examples are below:
           </p>
           <ul className="space-y-2">
             <li>
-              <a href="https://www.protocols.io/view/vesicle-fusion-on-sio2-substrates-36wgq3b4ylk5/v2" className="text-yellow-600 hover:underline">
+              <a href="https://www.protocols.io/view/vesicle-fusion-on-sio2-substrates-36wgq3b4ylk5/v2" className="text-yellow-600 hover:underline text-sm md:text-base">
                 → Vesicle Fusion on SiO2 Substrates
-
               </a>
             </li>
           </ul>
         </div>
 
-        <div className="bg-white p-8 border-l-4 border-blue-500">
-          <Github className="w-12 h-12 text-blue-600 mb-4" />
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">Code & Software</h2>
-          <p className="text-gray-600 mb-4">
+        <div className="bg-white p-6 md:p-8 border-l-4 border-blue-500">
+          <Github className="w-10 h-10 md:w-12 md:h-12 text-blue-600 mb-4" />
+          <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3">Code & Software</h2>
+          <p className="text-sm md:text-base text-gray-600 mb-4">
             Software and analysis tools developed by our group.
           </p>
           <ul className="space-y-2">
             <li>
-              <a href="https://github.com/paulstevensonlab/snvm-processing" className="text-yellow-600 hover:underline">
+              <a href="https://github.com/paulstevensonlab/snvm-processing" className="text-yellow-600 hover:underline text-sm md:text-base">
                 → SNVM Processing & Analysis Tools (GitHub)
               </a>
-            </li>
-            <li>
             </li>
           </ul>
         </div>
 
-        <div className="bg-white p-8 border-l-4 border-green-500">
-          <BookOpen className="w-12 h-12 text-green-600 mb-4" />
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">Educational Materials</h2>
-          <p className="text-gray-600 mb-4">
+        <div className="bg-white p-6 md:p-8 border-l-4 border-green-500">
+          <BookOpen className="w-10 h-10 md:w-12 md:h-12 text-green-600 mb-4" />
+          <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3">Educational Materials</h2>
+          <p className="text-sm md:text-base text-gray-600 mb-4">
             These notes and resources are provided as-is - they haven't been peer-reviewed, and are likely to 
             have at least some mistakes.
           </p>
           <ul className="space-y-2">
             <li>
-              <a href="https://www.snvm-qmsi.com/" className="text-yellow-600 hover:underline">
+              <a href="https://www.snvm-qmsi.com/" className="text-yellow-600 hover:underline text-sm md:text-base">
                 → A practical guide to using scanning NV microscopy
               </a>  - this is a work in progress!
             </li>
             <li>
-              <a href="#" className="text-yellow-600 hover:underline">
+              <a href="#" className="text-yellow-600 hover:underline text-sm md:text-base">
                 → Stay tuned for PHYS 5114 notes!
               </a>  (Once the embarassing typos have been fixed...)
             </li>
           </ul>
         </div>
 
-        <div className="bg-white p-8 border-l-4 border-purple-500">
-          <Download className="w-12 h-12 text-purple-600 mb-4" />
-          <h2 className="text-2xl font-semibold text-gray-900 mb-3">Datasets</h2>
-          <p className="text-gray-600 mb-4">
+        <div className="bg-white p-6 md:p-8 border-l-4 border-purple-500">
+          <Download className="w-10 h-10 md:w-12 md:h-12 text-purple-600 mb-4" />
+          <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-3">Datasets</h2>
+          <p className="text-sm md:text-base text-gray-600 mb-4">
             Where possible, we deposit data from our group on <b><a href="https://zenodo.org/" className="text-yellow-600 hover:underline"  >Zenodo</a></b>. 
             Some examples are below - but check the manuscripts directly for links!.
           </p>
           <ul className="space-y-2">
             <li>
-              <a href="https://zenodo.org/records/10830128" className="text-yellow-600 hover:underline">
+              <a href="https://zenodo.org/records/10830128" className="text-yellow-600 hover:underline text-sm md:text-base">
                 → Experimentally probing the effect of confinement geometry on lipid diffusion
               </a>
             </li>
             <li>
-              <a href="https://zenodo.org/records/11521189" className="text-yellow-600 hover:underline">
+              <a href="https://zenodo.org/records/11521189" className="text-yellow-600 hover:underline text-sm md:text-base">
                 → Optimizing off-axis fields for two-axis magnetometry with point defects
               </a>
             </li>
@@ -940,34 +988,34 @@ const ResearchPage = () => {
         </div>
       </div>
 
-      <div className="bg-gray-50 p-8">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">Useful Links</h2>
-        <div className="grid md:grid-cols-2 gap-4">
-          <a href="https://cos.northeastern.edu/nucos-department/physics/" className="text-yellow-600 hover:underline">• Northeastern Physics</a>
-          <a href="https://quantum.northeastern.edu/" className="text-yellow-600 hover:underline">• Quantum Materials and Sensing Institute</a>
-          <a href="https://magnetics.center.northeastern.edu/" className="text-yellow-600 hover:underline">• Magnetics Center at Northeastern University</a>
-          <a href="https://biophysics.sites.northeastern.edu/" className="text-yellow-600 hover:underline">• Biophysics Research at Northeastern University</a>
+      <div className="bg-gray-50 p-6 md:p-8">
+        <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-4">Useful Links</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+          <a href="https://cos.northeastern.edu/nucos-department/physics/" className="text-yellow-600 hover:underline text-sm md:text-base">• Northeastern Physics</a>
+          <a href="https://quantum.northeastern.edu/" className="text-yellow-600 hover:underline text-sm md:text-base">• Quantum Materials and Sensing Institute</a>
+          <a href="https://magnetics.center.northeastern.edu/" className="text-yellow-600 hover:underline text-sm md:text-base">• Magnetics Center at Northeastern University</a>
+          <a href="https://biophysics.sites.northeastern.edu/" className="text-yellow-600 hover:underline text-sm md:text-base">• Biophysics Research at Northeastern University</a>
         </div>
       </div>
     </div>
   );
 
-  // Contact Page
+  // Contact Page with responsive layout
   const ContactPage = () => (
-    <div className="px-16 py-12">
-      <h1 className="text-5xl font-light text-gray-900 mb-12">Contact Us</h1>
+    <div className="px-8 py-8 md:px-12 md:py-10 lg:px-16 lg:py-12">
+      <h1 className="text-3xl md:text-4xl lg:text-5xl font-light text-gray-900 mb-12">Contact Us</h1>
       
-      <div className="grid md:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
         <div>
-          <div className="bg-white p-8 mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-6">Get in Touch</h2>
+          <div className="bg-white p-6 md:p-8 mb-8">
+            <h2 className="text-xl md:text-2xl font-semibold text-gray-900 mb-6">Get in Touch</h2>
             
             <div className="space-y-4">
               <div className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-gray-400 mt-1" />
+                <MapPin className="w-4 h-4 md:w-5 md:h-5 text-gray-400 mt-1" />
                 <div>
-                  <p className="font-semibold text-gray-900">Lab Location</p>
-                  <p className="text-gray-600">
+                  <p className="font-semibold text-gray-900 text-sm md:text-base">Lab Location</p>
+                  <p className="text-sm md:text-base text-gray-600">
                     Egan Research Center<br />
                     Northeastern University<br />
                     120 Forsyth Street<br />
@@ -977,10 +1025,10 @@ const ResearchPage = () => {
               </div>
 
               <div className="flex items-start space-x-3">
-                <Mail className="w-5 h-5 text-gray-400 mt-1" />
+                <Mail className="w-4 h-4 md:w-5 md:h-5 text-gray-400 mt-1" />
                 <div>
-                  <p className="font-semibold text-gray-900">Email</p>
-                  <p className="text-gray-600">
+                  <p className="font-semibold text-gray-900 text-sm md:text-base">Email</p>
+                  <p className="text-sm md:text-base text-gray-600">
                     p.stevenson[at]northeastern.edu<br />
                   </p>
                 </div>
@@ -989,11 +1037,11 @@ const ResearchPage = () => {
             </div>
           </div>
 
-          <div className="bg-gray-50 p-8">
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Interested in working with us?</h3>
-            <p className="text-gray-600 mb-3">
+          <div className="bg-gray-50 p-6 md:p-8">
+            <h3 className="text-lg md:text-xl font-semibold text-gray-900 mb-4">Interested in working with us?</h3>
+            <p className="text-sm md:text-base text-gray-600 mb-3">
               We're always interested in hearing from potential students, postdocs and collaborators. Contact <button 
-            onClick={() => setCurrentPage('team')}
+            onClick={() => handlePageChange('team')}
             className="text-gray-900 font-semibold hover:underline"
           >
             Paul
@@ -1023,8 +1071,12 @@ const ResearchPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <Sidebar />
-      <div className="ml-64">
-        {renderPage()}
+      {/* Main content wrapper - responsive margin */}
+      <div className="md:ml-64 transition-all duration-300">
+        {/* Add padding-top on mobile for hamburger button space */}
+        <div className="pt-16 md:pt-0">
+          {renderPage()}
+        </div>
       </div>
     </div>
   );

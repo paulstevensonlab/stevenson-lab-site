@@ -2,6 +2,15 @@
 
 export const newsItems = [
   {
+    id: 22,
+    date: "October  15, 2025",
+    category: "GRANT",
+    categoryColor: "orange",
+    title: "Google Academic Research Award",
+    summary: "We're excited to announce a new award from Google to support our work on spin-dependent processes in biology!",
+    link: "https://research.google/programs-and-events/google-academic-research-awards/google-academic-research-award-program-recipients/"
+  },
+  {
     id: 21,
     date: "October  8, 2025",
     category: "PUBLICATION",

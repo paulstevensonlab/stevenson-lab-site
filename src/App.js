@@ -9,7 +9,7 @@ import {
 import { Calendar, Users, BookOpen, Microscope, Award, FileText,
    Github, Twitter, Linkedin, GraduationCap, Beaker, Mail, Phone, 
    MapPin, ExternalLink, Download, ChevronLeft, ChevronRight, Clock, ArrowRight, Menu, X } from 'lucide-react';
-
+import { Analytics } from '@vercel/analytics/react';
 
 
 const MinimalSidebarApp = () => {
@@ -1078,6 +1078,7 @@ const ResearchPage = () => {
           {renderPage()}
         </div>
       </div>
+      <Analytics />  {/* ADD THIS LINE */}
     </div>
   );
 };

@@ -7,7 +7,7 @@ export const newsItems = [
     category: "CONFERENCE",
     categoryColor: "purple",
     title: "Institute of Science, Tokyo",
-    summary: "Great visit to the Azuma and Shigematsu labs at IST!",
+    summary: "Great visit to the Azuma and Shigematsu labs at Science Tokyo- always great to see enthusiasm for BFO!",
     image: `${process.env.PUBLIC_URL}/images/events/ist_group.jpg`
   },
   {

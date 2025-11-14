@@ -837,7 +837,7 @@ const ResearchPage = () => {
     </div>
   );
 
-  // News Page with responsive layout
+   // News Page with responsive layout
   const NewsPage = () => {
     const getCategoryStyles = (color) => {
       const styles = {
@@ -881,18 +881,27 @@ const ResearchPage = () => {
           {item.title}
         </h2>
         {/* Conditionally render image if it exists */}
-          {item.image && (
-      <div className="mb-4">
-        <img 
-          src={item.image} 
-          alt={item.imageAlt || item.title}
-          className="w-full h-48 md:h-64 object-cover rounded-lg"
-          onError={(e) => {
-            e.target.style.display = 'none'; // Hide if image fails to load
-          }}
-        />
-      </div>
-    )}
+        {item.image && (
+          <div className="mb-4">
+            <div className="relative w-full overflow-hidden rounded-lg bg-white">
+              <img 
+                src={item.image} 
+                alt={item.imageAlt || item.title}
+                className="w-full h-auto"
+                style={{
+                  maxHeight: '24rem', // 384px max height on desktop
+                  objectFit: 'contain',
+                  display: 'block',
+                  margin: '0 0 0 0', // Left aligned
+                  objectPosition: 'left center'
+                }}
+                onError={(e) => {
+                  e.target.style.display = 'none'; // Hide if image fails to load
+                }}
+              />
+            </div>
+          </div>
+        )}
         <p className="text-sm md:text-base text-gray-600 mb-4 leading-relaxed">
           {item.summary}
         </p>

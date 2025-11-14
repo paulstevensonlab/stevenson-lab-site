@@ -2,6 +2,16 @@
 
 export const newsItems = [
   {
+    id: 23,
+    date: "November  14, 2025",
+    category: "CONFERENCE",
+    categoryColor: "purple",
+    title: "Institute of Science, Tokyo",
+    summary: "Great visit to the Azuma and Shigematsu labs at IST!",
+    link: "",
+    image: `${process.env.PUBLIC_URL}/images/events/ist.jpg`
+  },
+  {
     id: 22,
     date: "October  15, 2025",
     category: "GRANT",

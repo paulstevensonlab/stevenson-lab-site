@@ -8,7 +8,6 @@ export const newsItems = [
     categoryColor: "purple",
     title: "Institute of Science, Tokyo",
     summary: "Great visit to the Azuma and Shigematsu labs at IST!",
-    link: "",
     image: `${process.env.PUBLIC_URL}/images/events/ist.jpg`
   },
   {

@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { newsItems, newsCategories, getNewsByCategory } from './data/newsData';
-import { publications, getPublicationYears, getFeaturedPublications } from './data/publicationsData';
+import React, { useState, useEffect, useCallback } from 'react';
+import { newsItems } from './data/newsData';
+import { publications } from './data/publicationsData';
 import { 
   graduateStudents, 
   ugStudents, 
   pets,
 } from './data/peopleData';
-import { Calendar, Users, BookOpen, Microscope, Award, FileText,
-   Github, Twitter, Linkedin, GraduationCap, Beaker, Mail, Phone, 
-   MapPin, ExternalLink, Download, ChevronLeft, ChevronRight, Clock, ArrowRight, Menu, X } from 'lucide-react';
+import { Calendar, BookOpen, Github, Beaker, Mail, 
+   MapPin, Download, ChevronLeft, ChevronRight, Menu, X } from 'lucide-react';
 import { Analytics } from '@vercel/analytics/react';
 
 
@@ -87,21 +86,17 @@ const MinimalSidebarApp = () => {
             { id: 'resources', label: 'Resources' },
             { id: 'contact', label: 'Contact' }
           ].map(item => (
-            <a
+            <button
               key={item.id}
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                handlePageChange(item.id);
-              }}
-              className={`block py-2 px-4 transition-colors ${
+              onClick={() => handlePageChange(item.id)}
+              className={`block w-full text-left py-2 px-4 transition-colors ${
                 currentPage === item.id
                   ? 'bg-gray-800 text-white border-l-4 border-yellow-500' 
                   : 'text-gray-400 hover:text-white hover:bg-gray-800'
               }`}
             >
               {item.label}
-            </a>
+            </button>
           ))}
         </nav>
         
@@ -175,15 +170,15 @@ const ImageCarousel = () => {
     );
   };
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
+  }, [images.length]);
 
   // Optional: Auto-advance
   useEffect(() => {
     const interval = setInterval(goToNext, 10000);
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  }, [goToNext]);
 
   return (
     <div className="relative w-full h-64 md:h-80 lg:h-96 group">
@@ -839,19 +834,6 @@ const ResearchPage = () => {
 
    // News Page with responsive layout
   const NewsPage = () => {
-    const getCategoryStyles = (color) => {
-      const styles = {
-        yellow: "bg-yellow-100 text-yellow-800",
-        blue: "bg-blue-100 text-blue-800",
-        green: "bg-green-100 text-green-800",
-        purple: "bg-purple-100 text-purple-800",
-        indigo: "bg-indigo-100 text-indigo-800",
-        orange: "bg-orange-100 text-orange-800",
-        gray: "bg-gray-100 text-gray-800"
-      };
-      return styles[color] || "bg-gray-100 text-gray-800";
-    };
-
     const getBorderColor = (color) => {
       const borders = {
         yellow: "border-yellow-500",
@@ -963,9 +945,9 @@ const ResearchPage = () => {
           </p>
           <ul className="space-y-2">
             <li>
-              <a href="#" className="text-yellow-600 hover:underline text-sm md:text-base">
+              <span className="text-yellow-600 text-sm md:text-base">
                 → Stay tuned for PHYS 5114 notes!
-              </a>  (Once the embarassing typos have been fixed...)
+              </span>  (Once the embarrassing typos have been fixed...)
             </li>
           </ul>
         </div>
@@ -1082,7 +1064,7 @@ const ResearchPage = () => {
           {renderPage()}
         </div>
       </div>
-      <Analytics />  {/* ADD THIS LINE */}
+      <Analytics />
     </div>
   );
 };

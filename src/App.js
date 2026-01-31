@@ -963,11 +963,6 @@ const ResearchPage = () => {
           </p>
           <ul className="space-y-2">
             <li>
-              <a href="https://www.snvm-qmsi.com/" className="text-yellow-600 hover:underline text-sm md:text-base">
-                → A practical guide to using scanning NV microscopy
-              </a>  - this is a work in progress!
-            </li>
-            <li>
               <a href="#" className="text-yellow-600 hover:underline text-sm md:text-base">
                 → Stay tuned for PHYS 5114 notes!
               </a>  (Once the embarassing typos have been fixed...)

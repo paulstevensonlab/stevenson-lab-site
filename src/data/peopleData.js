@@ -37,6 +37,16 @@ export const graduateStudents = [
     research: "Biophysical Quantum Sensing",
   },
   {
+    name: "Lincoln Curtis",
+    photo: <img 
+          src={`${process.env.PUBLIC_URL}/images/team/students/lcurtis.png`} 
+            alt="??"
+            className="w-50 h-60 mx-auto mb-4 rounded-lg object-cover"
+          />,
+    degree: "PhD Student",
+    research: "Methods for Quantum Sensing",
+  },
+  {
     name: "You?",
     photo: <img 
           src={`${process.env.PUBLIC_URL}/images/team/students/new.png`} 
@@ -52,24 +62,13 @@ export const ugStudents = [
   {
     name: "Ky Farhadi",
     photo: <img 
-          src={`${process.env.PUBLIC_URL}/images/team/students/kf.jpg`} 
+          src={`${process.env.PUBLIC_URL}/images/team/students/mfarrington.png`} 
             alt="Ky Farhadi"
             className="w-30 h-40 mx-auto mb-4 rounded-lg object-cover"
           />,
-    major: "Biochemistry",
-    year: "Senior", // Optional
+    major: "Physics",
+    year: null, // Optional
     project: null // Optional
-  },
-  {
-    name: "Joshua Reid",
-    photo: <img 
-          src={`${process.env.PUBLIC_URL}/images/team/students/new.png`} 
-            alt="Joshua Reid"
-            className="w-30 h-40 mx-auto mb-4 rounded-lg object-cover"
-          />,
-    major: "Physics & Engineering",
-    year: null,
-    project: null
   },
   {
     name: "You?",

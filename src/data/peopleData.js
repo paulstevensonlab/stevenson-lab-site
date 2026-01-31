@@ -41,7 +41,7 @@ export const graduateStudents = [
     photo: <img 
           src={`${process.env.PUBLIC_URL}/images/team/students/lcurtis.jpeg`} 
             alt="Lincoln Curtis"
-            className="w-50 h-50 mx-auto mb-4 rounded-lg object-cover"
+            className="w-40 h-34 mx-auto mb-4 rounded-lg object-cover"
           />,
     degree: "PhD Student",
     research: "Methods for Quantum Sensing",

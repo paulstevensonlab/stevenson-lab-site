@@ -39,9 +39,9 @@ export const graduateStudents = [
   {
     name: "Lincoln Curtis",
     photo: <img 
-          src={`${process.env.PUBLIC_URL}/images/team/students/lcurtis.png`} 
-            alt="??"
-            className="w-50 h-60 mx-auto mb-4 rounded-lg object-cover"
+          src={`${process.env.PUBLIC_URL}/images/team/students/lcurtis.jpeg`} 
+            alt="Lincoln Curtis"
+            className="w-50 h-50 mx-auto mb-4 rounded-lg object-cover"
           />,
     degree: "PhD Student",
     research: "Methods for Quantum Sensing",
@@ -60,10 +60,10 @@ export const graduateStudents = [
 
 export const ugStudents = [
   {
-    name: "Ky Farhadi",
+    name: "Megan Farrington",
     photo: <img 
           src={`${process.env.PUBLIC_URL}/images/team/students/mfarrington.png`} 
-            alt="Ky Farhadi"
+            alt="Megan Farrington"
             className="w-30 h-40 mx-auto mb-4 rounded-lg object-cover"
           />,
     major: "Physics",

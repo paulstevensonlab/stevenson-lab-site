@@ -4,6 +4,15 @@ export const newsItems = [
   {
     id: 23,
     date: "November  14, 2025",
+    category: "ACHIEVEMENT",
+    categoryColor: "indigo",
+    title: "BPS Poster Award",
+    summary: "Congratulations to Nicole for winning the poster competition at BPS 2026! Her poster on using NV centers to probe biophysical signals was a hit!",
+    image: `${process.env.PUBLIC_URL}/images/events/nv_bps.jpg`
+  },
+  {
+    id: 23,
+    date: "November  14, 2025",
     category: "CONFERENCE",
     categoryColor: "purple",
     title: "Institute of Science, Tokyo",

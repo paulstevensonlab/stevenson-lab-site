@@ -2,8 +2,17 @@
 
 export const newsItems = [
   {
+    id: 24,
+    date: "March 16, 2026",
+    category: "PUBLICATION",
+    categoryColor: "blue",
+    title: "Imaging Nonlinear Spin Waves in Magnetoacoustic Nanodevices",
+    summary: "Nathaniel's paper on imaging spin waves in magnetoacoustic nanodevices is now online! Check out how we can use NV centers to map out nonlinear spin wave dynamics in these exciting new devices.",
+    link: "https://pubs.acs.org/doi/10.1021/acsanm.6c00365"
+  },
+  {
     id: 23,
-    date: "November  14, 2025",
+    date: "February  25, 2026",
     category: "ACHIEVEMENT",
     categoryColor: "indigo",
     title: "BPS Poster Award",

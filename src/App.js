@@ -491,7 +491,7 @@ const ResearchPage = () => {
     const [searchQuery, setSearchQuery] = useState("");
 
     // Get unique years from publications
-    const years = ["all", "2025", "2024", "2023", "2022", "2021"];
+    const years = ["all", "2026", "2025", "2024", "2023", "2022", "2021"];
     
     // Filter publications based on selected filters
     const filteredPublications = publications.filter(pub => {

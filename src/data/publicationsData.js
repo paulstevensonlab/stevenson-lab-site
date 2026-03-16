@@ -27,23 +27,24 @@ export const publications = [
 { 
   id: 29,
   year: "Preprint",
-  title: "Imaging nonlinear spin waves in magnetoacoustic devices",
-  authors: "Beaver, N., Luo, B., Chiu, S.-W., Bas, D. A., Franson, A., Wolf, M. S., Page, M. R., Newburger, M. J., Caretta, L., Sun, N. X., Stevenson, P.",
-  journal: "arXiv",
-  arxiv: "2507.10724",
-  link: "https://arxiv.org/abs/2507.10724",
-  type: "preprint",
-  featured: false 
-},
-{ 
-  id: 28,
-  year: "Preprint",
   title: "Low-energy domain wall racetracks with multiferroic topologies",
   authors: "Ghosal, A., Qualls, A., Nahas, Y., Ojha, S., Meisenheimer, P., Zhou, S., Ramesh, M., Husain, S., Mundy, J., Schlom, D., Yao, Z., Prokhorenko, S., Bellaiche, L., Ramesh, R., Stevenson, P., Caretta, L.",
   journal: "arXiv",
   arxiv: "2507.12633",
   link: "https://arxiv.org/abs/2507.12633",
   type: "preprint",
+  featured: false 
+},
+  // 2026
+{ 
+  id: 28,
+  year: 2026,
+  title: "Imaging Nonlinear Spin Waves in Magnetoacoustic Nanodevices",
+  authors: "Beaver, N., Luo, B., Chiu, S.-W., Bas, D. A., Franson, A., Wolf, M. S., Page, M. R., Newburger, M. J., Caretta, L., Sun, N. X., Stevenson, P.",
+  journal: "ACS Applied Nano Materials",
+  doi: "doi/10.1021/acsanm.6c00365",
+  link: "https://doi.org/10.1021/acsanm.6c00365",
+  type: "article",
   featured: false 
 },
   // 2025

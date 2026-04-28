@@ -2,6 +2,15 @@
 
 export const newsItems = [
   {
+    id: 25,
+    date: "April 28, 2026",
+    category: "PUBLICATION",
+    categoryColor: "blue",
+    title: "Strong intrinsic multiferroism and magnetoelectric coupling in (1-x)BiFeO3-(x)BaTiO3 films",
+    summary: "New collaborative work led by Rice and UC Berkeley - check out how NV centers allow us to image emergent ferromagnetism in this system!",
+    link: "https://www.pnas.org/doi/10.1073/pnas.2603475123"
+  },
+  {
     id: 24,
     date: "March 16, 2026",
     category: "PUBLICATION",

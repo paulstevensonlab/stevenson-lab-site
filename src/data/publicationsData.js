@@ -3,7 +3,7 @@
 export const publications = [
   // Preprints
   { 
-  id: 31,
+  id: 32,
   year: "Preprint",
   title: "Efficient Radiofrequency Sensing with Fluorescence Encoding",
   authors: "Voce, N., Stevenson, P.",
@@ -14,7 +14,7 @@ export const publications = [
   featured: false 
 },
 { 
-  id: 30,
+  id: 31,
   year: "Preprint",
   title: "Signatures of Non-Abelian Kitaev quantum spin liquids in noise magnetometry",
   authors: "Xiao, X., Takahashi, M. O., Stevenson, P., Fujimoto, S., Bansil, A.",
@@ -25,7 +25,7 @@ export const publications = [
   featured: false 
 },
 { 
-  id: 29,
+  id: 30,
   year: "Preprint",
   title: "Low-energy domain wall racetracks with multiferroic topologies",
   authors: "Ghosal, A., Qualls, A., Nahas, Y., Ojha, S., Meisenheimer, P., Zhou, S., Ramesh, M., Husain, S., Mundy, J., Schlom, D., Yao, Z., Prokhorenko, S., Bellaiche, L., Ramesh, R., Stevenson, P., Caretta, L.",
@@ -36,6 +36,17 @@ export const publications = [
   featured: false 
 },
   // 2026
+  { 
+  id: 29,
+  year: 2026,
+  title: "Strong intrinsic multiferroism and magnetoelectric coupling in (1-x)BiFeO3-(x)BaTiO3 films",
+  authors: "Kim, T. Y., Schimpf, J., Paul, A., Xu, M., Samanta, A., Husain, S., Meisenheimer, P., Harris, I., Finkel, P., Mion, T., Staruch, M., Ruffino, A. J., Masiuk, S., Wu, L., Park, T. J., Kang, D., Klewe, C., Stevenson, P., Ramesh, R., Rappe, A. M., LeBeau, J. M., Spanier, J. E., Grinberg, I., Martin, L. W.",
+  journal: "PNAS",
+  doi: "doi/10.1073/pnas.2603475123",
+  link: "https://www.pnas.org/doi/epdf/10.1073/pnas.2603475123",
+  type: "article",
+  featured: false 
+},
 { 
   id: 28,
   year: 2026,

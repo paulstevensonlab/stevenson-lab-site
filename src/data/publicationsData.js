@@ -3,7 +3,18 @@
 export const publications = [
   // Preprints
   { 
-  id: 32,
+  id: 34,
+  year: "Preprint",
+  title: "Topological textures and emergent altermagnetic signatures in ultrathin BiFeO3",
+  authors: "Fratian, G., Ramesh, M., Li, X., et al.",
+  journal: "arXiv",
+  arxiv: "2601.09970",
+  link: "https://arxiv.org/abs/2601.09970",
+  type: "preprint",
+  featured: false 
+},
+  { 
+  id: 33,
   year: "Preprint",
   title: "Efficient Radiofrequency Sensing with Fluorescence Encoding",
   authors: "Voce, N., Stevenson, P.",
@@ -14,7 +25,7 @@ export const publications = [
   featured: false 
 },
 { 
-  id: 31,
+  id: 32,
   year: "Preprint",
   title: "Low-energy domain wall racetracks with multiferroic topologies",
   authors: "Ghosal, A., Qualls, A., Nahas, Y., Ojha, S., Meisenheimer, P., Zhou, S., Ramesh, M., Husain, S., Mundy, J., Schlom, D., Yao, Z., Prokhorenko, S., Bellaiche, L., Ramesh, R., Stevenson, P., Caretta, L.",
@@ -25,6 +36,17 @@ export const publications = [
   featured: false 
 },
   // 2026
+  { 
+  id: 31,
+  year: 2026,
+  title: "Electric field–induced ferromagnetic domain change by ferroelectric topological domain switching in Co-substituted BiFeO3 nanodots",
+  authors: "Lee, K., Meisenheimer, P., Stevenson, P., Nagase, Y., Shigematsu, K., Ramesh, R., Azuma, M.",
+  journal: "Science Advances",
+  doi: "doi/10.1126/sciadv.aec2861",
+  link: "https://www.science.org/doi/10.1126/sciadv.aec2861",
+  type: "article",
+  featured: false 
+},
   { 
   id: 30,
   year: 2026,
